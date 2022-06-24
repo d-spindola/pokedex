@@ -23,7 +23,7 @@ export async function getPokemon(nameOrId: string) {
  * @returns a list of pokemons (it's a page)
  */
 export async function getManyPokemons() {
-  return pokeApi.get<any>(`/pokemon?limit=${10}&offset=${0}`);
+  return pokeApi.get<any>(`/pokemon?limit=${50}&offset=${0}`);
 }
 
 export default pokeApi;
