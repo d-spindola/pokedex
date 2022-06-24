@@ -4,7 +4,7 @@ const HomePageMainLayout = styled("main")(({ children }) => ({
   display: "grid",
   gridTemplateColumns: "1fr",
   gap: "1.5em",
-  background: "linear-gradient(115deg, #ffffff, #ccd7ffe0)",
+  background: "#1d1f26",
   padding: "0 1em",
 }));
 
