@@ -55,8 +55,12 @@ const PokemonCardLink: FC<Props> = ({ pokemonName, types, id }) => {
     const el = document.getElementById(imageId);
 
     if (el) {
-      const [r, g, b] = ct.getColor(el, 1);
-      setBackground(`rgb(${r}, ${g}, ${b})`);
+      try {
+        const [r, g, b] = ct.getColor(el, 1);
+        setBackground(`rgb(${r}, ${g}, ${b})`);
+      } catch (e) {
+        setBackground(`#ff6666`);
+      }
     }
   }, [pokemon, ref]);
 
