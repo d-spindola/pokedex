@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import { FC, useEffect, useRef, useState } from "react";
 import { getPokemon } from "../lib/api";
 import { Pokemon } from "../types/api";
-import { hexColorRandomizer } from "../utils/hexColorRandomizer";
-import Image from "next/image";
+/** eslint-disable next-line */
 import CT from "colorthief";
+/** eslint-enable next-line */
 
 interface Props {
   pokemonName: string;
@@ -53,14 +53,11 @@ const PokemonCardLink: FC<Props> = ({ pokemonName, types, id }) => {
   useEffect(() => {
     const ct = new CT();
     const el = document.getElementById(imageId);
-    console.log(ct, el);
 
     if (el) {
       const [r, g, b] = ct.getColor(el, 1);
       setBackground(`rgb(${r}, ${g}, ${b})`);
     }
-
-    // console.log(color);
   }, [pokemon, ref]);
 
   return (

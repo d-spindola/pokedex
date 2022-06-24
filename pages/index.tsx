@@ -1,55 +1,13 @@
-import styled from "@emotion/styled";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { Fragment, ReactNode } from "react";
+import { Fragment } from "react";
+import FilterContainer from "../components/layouts/home/FilterContainer";
+import HomePageMainLayout from "../components/layouts/home/HomePageMainLayout";
 import PokemonCardLink from "../components/PokemonCardLink";
 import PokemonGridList from "../components/PokemonGridList";
 import { getManyPokemons } from "../lib/api";
 import { Pokemon } from "../types/api";
-
-const FilterContainer = styled("div")(() => ({
-  backgroundColor: "#212121",
-  height: "8em",
-  display: "flex",
-  alignItems: "center",
-  gap: "0.5em",
-  padding: "0 1.5em",
-}));
-
-const mapTooltipColor = (type: string | ReactNode) => {
-  switch (type) {
-    case "grass":
-      return "green";
-    case "fire":
-      return "red";
-    case "thunder":
-      return "yellow";
-  }
-};
-
-const PokemonTypeTooltip = styled("div")(({ children }) => ({
-  height: "2em",
-  minWidth: "4em",
-  fontSize: "1.5em",
-  color: "black",
-  borderRadius: "1.2em",
-  backgroundColor: mapTooltipColor(children),
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  "&:hover": {
-    cursor: "pointer",
-  },
-}));
-
-const HomePageMainLayout = styled("main")(({ children }) => ({
-  display: "grid",
-  gridTemplateColumns: "1fr",
-  gap: "1.5em",
-  background: "linear-gradient(115deg, #ffffff, #ccd7ffe0)",
-  padding: "0 1em",
-}));
 
 interface HomePageProps {
   pokemons: Pokemon[];
@@ -71,11 +29,7 @@ const Home: NextPage<HomePageProps> = ({ pokemons }) => {
           </div>
         </header>
 
-        <FilterContainer>
-          {/* <PokemonTypeTooltip>fire</PokemonTypeTooltip>
-          <PokemonTypeTooltip>grass</PokemonTypeTooltip>
-          <PokemonTypeTooltip>thunder</PokemonTypeTooltip> */}
-        </FilterContainer>
+        <FilterContainer></FilterContainer>
 
         <div>
           <PokemonGridList>
@@ -96,7 +50,7 @@ const Home: NextPage<HomePageProps> = ({ pokemons }) => {
   );
 };
 
-export const getServerSideProps = async (context: any) => {
+export const getServerSideProps = async () => {
   const pokemons = await getManyPokemons();
 
   return {
