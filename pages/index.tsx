@@ -6,8 +6,10 @@ import FilterContainer from "../components/layouts/home/FilterContainer";
 import HomePageMainLayout from "../components/layouts/home/HomePageMainLayout";
 import PokemonCardLink from "../components/PokemonCardLink";
 import PokemonGridList from "../components/PokemonGridList";
-import { getManyPokemons } from "../lib/api";
+import { getManyPokemons, getPokemon } from "../lib/api";
+import { PokemonPayload } from "../lib/types";
 import { Pokemon } from "../types/api";
+const Colorthief = require("colorthief");
 
 interface HomePageProps {
   pokemons: Pokemon[];
@@ -26,6 +28,7 @@ const Home: NextPage<HomePageProps> = ({ pokemons }) => {
         <header>
           <div>
             <Image src="/logo.svg" width={32} height={32} />
+            <p>Pokedx</p>
           </div>
         </header>
 
@@ -40,6 +43,8 @@ const Home: NextPage<HomePageProps> = ({ pokemons }) => {
                   pokemonName={p.name}
                   id={p.name}
                   types={[]}
+                  dominantColor={p.dominantColor}
+                  sprites={p.sprites}
                 />
               ))}
             </Fragment>
@@ -50,12 +55,32 @@ const Home: NextPage<HomePageProps> = ({ pokemons }) => {
   );
 };
 
+const fetchPokemonMetadadata = async (
+  pokemon: PokemonPayload,
+  colorFunc: (str: string, quality: number) => [string, string, string]
+) => {
+  const { sprites } = await getPokemon(pokemon.name);
+  const pokemonDominantColor = await colorFunc(sprites.front_default, 50);
+
+  return {
+    ...pokemon,
+    dominantColor: pokemonDominantColor,
+    sprites,
+  };
+};
+
 export const getServerSideProps = async () => {
   const pokemons = await getManyPokemons();
 
+  const pokemonsWithColors = await Promise.all(
+    pokemons.data.results.map(async (p: PokemonPayload) =>
+      fetchPokemonMetadadata(p, Colorthief.getColor)
+    )
+  );
+
   return {
     props: {
-      pokemons: pokemons.data.results,
+      pokemons: pokemonsWithColors,
     },
   };
 };
