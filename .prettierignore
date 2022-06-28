@@ -4,3 +4,5 @@
 .eslintrc
 .prettierrc
 *.md
+*.setup.js
+*.setup.ts
