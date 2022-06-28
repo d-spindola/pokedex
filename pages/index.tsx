@@ -1,18 +1,18 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import { Fragment } from "react";
-import FilterContainer from "../components/layouts/home/FilterContainer";
-import HomePageMainLayout from "../components/layouts/home/HomePageMainLayout";
-import PokemonCardLink from "../components/PokemonCardLink";
-import PokemonGridList from "../components/PokemonGridList";
-import { getManyPokemons, getPokemon } from "../lib/api";
-import { PokemonPayload } from "../lib/types";
-import { Pokemon } from "../types/api";
-const Colorthief = require("colorthief");
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import Image from 'next/image'
+import { Fragment } from 'react'
+import FilterContainer from '../components/layouts/home/FilterContainer'
+import HomePageMainLayout from '../components/layouts/home/HomePageMainLayout'
+import PokemonCardLink from '../components/PokemonCardLink'
+import PokemonGridList from '../components/PokemonGridList'
+import { getManyPokemons, getPokemon } from '../lib/api'
+import { PokemonPayload } from '../lib/types'
+import { Pokemon } from '../types/api'
+const Colorthief = require('colorthief')
 
 interface HomePageProps {
-  pokemons: Pokemon[];
+  pokemons: Pokemon[]
 }
 
 const Home: NextPage<HomePageProps> = ({ pokemons }) => {
@@ -52,37 +52,37 @@ const Home: NextPage<HomePageProps> = ({ pokemons }) => {
         </div>
       </HomePageMainLayout>
     </div>
-  );
-};
+  )
+}
 
 const fetchPokemonMetadadata = async (
   pokemon: PokemonPayload,
-  colorFunc: (str: string, quality: number) => [string, string, string]
+  colorFunc: (str: string, quality: number) => [string, string, string],
 ) => {
-  const { sprites } = await getPokemon(pokemon.name);
-  const pokemonDominantColor = await colorFunc(sprites.front_default, 50);
+  const { sprites } = await getPokemon(pokemon.name)
+  const pokemonDominantColor = await colorFunc(sprites.front_default, 50)
 
   return {
     ...pokemon,
     dominantColor: pokemonDominantColor,
     sprites,
-  };
-};
+  }
+}
 
 export const getServerSideProps = async () => {
-  const pokemons = await getManyPokemons();
+  const pokemons = await getManyPokemons()
 
   const pokemonsWithColors = await Promise.all(
     pokemons.data.results.map(async (p: PokemonPayload) =>
-      fetchPokemonMetadadata(p, Colorthief.getColor)
-    )
-  );
+      fetchPokemonMetadadata(p, Colorthief.getColor),
+    ),
+  )
 
   return {
     props: {
       pokemons: pokemonsWithColors,
     },
-  };
-};
+  }
+}
 
-export default Home;
+export default Home

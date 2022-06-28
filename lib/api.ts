@@ -1,11 +1,11 @@
-import axios from "axios";
-import { PokemonPayload } from "./types";
+import axios from 'axios'
+import { PokemonPayload } from './types'
 
 const pokeApi = axios.create({
-  baseURL: " https://pokeapi.co/api/v2/",
-});
+  baseURL: ' https://pokeapi.co/api/v2/',
+})
 
-pokeApi.defaults.timeout = 5000;
+pokeApi.defaults.timeout = 5000
 
 /**
  * This function is responsible for get a pokemon by its name or ID.
@@ -15,7 +15,7 @@ pokeApi.defaults.timeout = 5000;
 export async function getPokemon(nameOrId: string) {
   return pokeApi
     .get<PokemonPayload>(`/pokemon/${nameOrId}`)
-    .then((res) => res.data);
+    .then((res) => res.data)
 }
 
 /**
@@ -23,7 +23,7 @@ export async function getPokemon(nameOrId: string) {
  * @returns a list of pokemons (it's a page)
  */
 export async function getManyPokemons() {
-  return pokeApi.get<any>(`/pokemon?limit=${50}&offset=${0}`);
+  return pokeApi.get<any>(`/pokemon?limit=${50}&offset=${0}`)
 }
 
-export default pokeApi;
+export default pokeApi

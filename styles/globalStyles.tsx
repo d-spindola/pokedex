@@ -1,10 +1,10 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react'
 
 export default css`
   * {
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   body {
@@ -16,4 +16,4 @@ export default css`
     padding: 0;
     margin: 0;
   }
-`;
+`
