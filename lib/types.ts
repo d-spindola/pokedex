@@ -5,8 +5,12 @@ export type Sprite = {
   front_female: string
 }
 
-export interface PokemonPayload {
+export interface ApiPokemon {
   id: string
   name: string
   sprites: Sprite
+}
+
+export interface ApiPokemonList {
+  results: ApiPokemon[]
 }

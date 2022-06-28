@@ -1,5 +1,6 @@
-import { PokemonPayload } from '../lib/types'
+import { Color } from 'colorthief'
+import { ApiPokemon } from '../lib/types'
 
-export type Pokemon = PokemonPayload & {
-  dominantColor: [string, string, string]
+export type Pokemon = ApiPokemon & {
+  dominantColor: Color
 }
