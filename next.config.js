@@ -1,7 +1,7 @@
 const path = require("path");
 
 const appInfo = {
-  app_name: "pokedx",
+  APP_NAME: "pokedx",
 };
 
 /** @type {import('next').NextConfig} */
