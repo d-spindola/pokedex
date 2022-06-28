@@ -1,15 +1,13 @@
 import styled from "@emotion/styled";
-import { FC, useEffect, useRef, useState } from "react";
-import { getPokemon } from "../lib/api";
-import { Pokemon } from "../types/api";
-/** eslint-disable next-line */
-import CT from "colorthief";
-/** eslint-enable next-line */
+import { FC } from "react";
+import { Sprite } from "../lib/types";
 
 interface Props {
   pokemonName: string;
   types: string[];
   id: unknown;
+  dominantColor: [string, string, string];
+  sprites: Sprite;
 }
 
 const Container = styled.div<{ background: string }>(({ background }) => ({
@@ -19,6 +17,14 @@ const Container = styled.div<{ background: string }>(({ background }) => ({
   height: "10em",
   borderRadius: "8px",
   padding: "0 15px",
+  position: "relative",
+  "&::before": {
+    content: "''",
+    backgroundImage: "url('/pokeball.png')",
+    backgroundBlendMode: "soft-light",
+    backgroundPosition: "top",
+    backgroundPositionX: "0px",
+  },
 }));
 
 const PokemonNameContainer = styled.div(() => ({
@@ -38,34 +44,15 @@ const ImageContainer = styled.div`
   align-items: center;
 `;
 
-const PokemonCardLink: FC<Props> = ({ pokemonName, types, id }) => {
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
-  const imageId = `pokemon-image-${pokemonName}`;
-  const [background, setBackground] = useState<string>("");
-  const ref = useRef<HTMLImageElement>();
-
-  useEffect(() => {
-    getPokemon(pokemonName).then((p) => {
-      setPokemon(p);
-    });
-  }, []);
-
-  useEffect(() => {
-    const ct = new CT();
-    const el = document.getElementById(imageId);
-
-    if (el) {
-      try {
-        const [r, g, b] = ct.getColor(el, 1);
-        setBackground(`rgb(${r}, ${g}, ${b})`);
-      } catch (e) {
-        setBackground(`#ff6666`);
-      }
-    }
-  }, [pokemon, ref]);
-
+const PokemonCardLink: FC<Props> = ({
+  pokemonName,
+  types,
+  // id,
+  dominantColor: [r, g, b],
+  sprites,
+}) => {
   return (
-    <Container background={background}>
+    <Container background={`rgb(${r}, ${g}, ${b})`}>
       <PokemonNameContainer>
         <PokemonNameText>{pokemonName}</PokemonNameText>
       </PokemonNameContainer>
@@ -77,11 +64,9 @@ const PokemonCardLink: FC<Props> = ({ pokemonName, types, id }) => {
         </ul>
       </div>
       <ImageContainer>
-        {pokemon && pokemon.sprites.front_default && (
+        {sprites.front_default && (
           <img
-            ref={ref}
-            id={imageId}
-            src={pokemon.sprites.front_default}
+            src={sprites.front_default}
             width={100}
             height={100}
             crossOrigin="anonymous"
