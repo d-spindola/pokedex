@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Color } from 'colorthief'
 import { FC } from 'react'
-import { Sprite } from '../lib/types'
+import { Sprite } from '@lib/poke-api/types'
 
 interface Props {
   pokemonName: string
@@ -48,7 +48,6 @@ const ImageContainer = styled.div({
 const PokemonCardLink: FC<Props> = ({
   pokemonName,
   types,
-  // id,
   dominantColor: [r, g, b],
   sprites,
 }) => {

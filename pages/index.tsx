@@ -24,7 +24,7 @@ const Home: NextPage<HomePageProps> = ({ pokemons }: HomePageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomePageMainLayout>
-        <Header appName={process.env.APP_NAME} />
+        <Header appName={process.env.APP_NAME as string} />
         <FilterContainer></FilterContainer>
         <div>
           <PokemonGridList>
