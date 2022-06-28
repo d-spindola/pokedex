@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
+import { FC } from "react";
 
 const HeaderContainer = styled.header({
   display: "flex",
@@ -14,12 +15,16 @@ const LogoContainer = styled.div({
   fontWeight: "bold",
 });
 
-const Header = () => {
+interface Props {
+  appName: string;
+}
+
+const Header: FC<Props> = ({ appName }) => {
   return (
     <HeaderContainer>
       <LogoContainer>
         <Image src="/pokeball.png" width={32} height={32} />
-        <p>{process.env.app_name}</p>
+        <p>{appName}</p>
       </LogoContainer>
     </HeaderContainer>
   );
