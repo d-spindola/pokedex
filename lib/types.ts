@@ -1,8 +1,8 @@
-type Sprite = {
-  back_default: string | null;
-  back_female: string | null;
-  front_default: string | null;
-  front_female: string | null;
+export type Sprite = {
+  back_default: string;
+  back_female: string;
+  front_default: string;
+  front_female: string;
 };
 
 export interface PokemonPayload {
