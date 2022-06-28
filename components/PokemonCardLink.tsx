@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { Color } from 'colorthief'
 import { FC } from 'react'
 import { Sprite } from '../lib/types'
 
@@ -6,7 +7,7 @@ interface Props {
   pokemonName: string
   types: string[]
   id: unknown
-  dominantColor: [string, string, string]
+  dominantColor: Color
   sprites: Sprite
 }
 
@@ -27,22 +28,22 @@ const Container = styled.div<{ background: string }>(({ background }) => ({
   },
 }))
 
-const PokemonNameContainer = styled.div(() => ({
+const PokemonNameContainer = styled.div({
   padding: '0 5px',
-}))
+})
 
-const PokemonNameText = styled.p(() => ({
+const PokemonNameText = styled.p({
   fontSize: '1.5em',
   color: 'white',
   fontWeight: 'bold',
-}))
+})
 
-const ImageContainer = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: end;
-  align-items: center;
-`
+const ImageContainer = styled.div({
+  display: 'flex',
+  flex: 1,
+  justifyContent: 'end',
+  alignItems: 'center',
+})
 
 const PokemonCardLink: FC<Props> = ({
   pokemonName,
