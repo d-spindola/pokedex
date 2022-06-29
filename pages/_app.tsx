@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import { Global } from '@emotion/react'
 import globalStyles from '../styles/globalStyles'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <Fragment>
       <Global styles={globalStyles} />

@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Fragment } from 'react'
@@ -7,15 +7,15 @@ import HomePageMainLayout from '../components/layouts/home/HomePageMainLayout'
 import PokemonCardLink from '../components/PokemonCardLink'
 import PokemonGridList from '../components/PokemonGridList'
 import { getManyPokemons, getPokemon } from '../lib/api'
-import { PokemonPayload } from '../lib/types'
+import { ApiPokemon } from '../lib/types'
 import { Pokemon } from '../types/api'
-const Colorthief = require('colorthief')
+import Colorthief, { Color } from 'colorthief'
 
 interface HomePageProps {
   pokemons: Pokemon[]
 }
 
-const Home: NextPage<HomePageProps> = ({ pokemons }) => {
+const Home: NextPage<HomePageProps> = ({ pokemons }: HomePageProps) => {
   return (
     <div>
       <Head>
@@ -56,9 +56,9 @@ const Home: NextPage<HomePageProps> = ({ pokemons }) => {
 }
 
 const fetchPokemonMetadadata = async (
-  pokemon: PokemonPayload,
-  colorFunc: (str: string, quality: number) => [string, string, string],
-) => {
+  pokemon: ApiPokemon,
+  colorFunc: (str: string, quality: number) => Color,
+): Promise<Pokemon> => {
   const { sprites } = await getPokemon(pokemon.name)
   const pokemonDominantColor = await colorFunc(sprites.front_default, 50)
 
@@ -69,11 +69,11 @@ const fetchPokemonMetadadata = async (
   }
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const pokemons = await getManyPokemons()
 
   const pokemonsWithColors = await Promise.all(
-    pokemons.data.results.map(async (p: PokemonPayload) =>
+    pokemons.data.results.map(async (p: ApiPokemon) =>
       fetchPokemonMetadadata(p, Colorthief.getColor),
     ),
   )
