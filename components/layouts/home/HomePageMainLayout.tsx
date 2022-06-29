@@ -3,9 +3,11 @@ import styled from '@emotion/styled'
 const HomePageMainLayout = styled('main')({
   display: 'grid',
   gridTemplateColumns: '1fr',
-  gap: '1.5em',
-  background: '#1d1f26',
+  gridTemplateRows: '10vh 15vh auto',
+  gap: '1em',
+  background: '#ffb58c38',
   padding: '0 1em',
+  height: 'min(100vh)',
 })
 
 export default HomePageMainLayout
