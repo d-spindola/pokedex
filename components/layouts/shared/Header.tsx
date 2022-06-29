@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import Image from 'next/image'
-import { FC } from 'react'
+import { FC, PropsWithChildren } from 'react'
 
 const HeaderContainer = styled.header({
   display: 'flex',
@@ -19,7 +19,7 @@ interface Props {
   appName: string
 }
 
-const Header: FC<Props> = ({ appName }) => {
+const Header: FC<PropsWithChildren<Props>> = ({ appName, children }) => {
   return (
     <HeaderContainer>
       <LogoContainer>
@@ -31,6 +31,7 @@ const Header: FC<Props> = ({ appName }) => {
         />
         <p>{appName}</p>
       </LogoContainer>
+      {children}
     </HeaderContainer>
   )
 }
