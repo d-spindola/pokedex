@@ -3,6 +3,7 @@ import { Color } from 'colorthief'
 import { FC } from 'react'
 import { Sprite } from '@lib/poke-api/types'
 import { arrayRgbToHsl, arrayToRgb } from 'utils/colors'
+import Image from 'next/image'
 
 interface Props {
   pokemonName: string
@@ -60,7 +61,7 @@ const PokemonCardLink: FC<Props> = ({
   sprites,
 }) => {
   return (
-    <Container background={dominantColor}>
+    <Container data-testid="test-card-link" background={dominantColor}>
       <PokemonNameContainer>
         <PokemonNameText>{pokemonName}</PokemonNameText>
       </PokemonNameContainer>
@@ -73,7 +74,7 @@ const PokemonCardLink: FC<Props> = ({
       </div>
       <ImageContainer>
         {sprites.front_default && (
-          <img
+          <Image
             src={sprites.front_default}
             width={100}
             height={100}
