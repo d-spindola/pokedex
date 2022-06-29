@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { useDataContext } from 'context/DataContext/useDataContext'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import PokemonCardLink from './PokemonCardLink'
 
 const Grid = styled.div({
@@ -27,17 +27,18 @@ const NotFoundMessageContainer = styled.div({
 const PokemonGridList: FC = () => {
   const { data } = useDataContext()
 
-  const renderPokemons = () => {
+  const renderPokemons = (): ReactNode => {
     if (!data.length) {
       return (
         <NotFoundMessageContainer>
-          <span>Looks like we didn't find any pokemon with this name</span>
+          <span>{`Looks like we didn't find any pokemon with this name`}</span>
         </NotFoundMessageContainer>
       )
     }
 
     return data.map(({ name, dominantColor, sprites }) => (
       <PokemonCardLink
+        data-testid="test-card-link"
         key={name}
         pokemonName={name}
         id={name}
