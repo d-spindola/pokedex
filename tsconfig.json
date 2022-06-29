@@ -23,7 +23,8 @@
       "@components/*": ["components/*"],
       "@styles/*": ["styles/*"],
       "@lib/poke-api/*": ["lib/*"],
-      "!types/*": ["types/*"]
+      "!types/*": ["types/*"],
+      "?context/*": ["context/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
