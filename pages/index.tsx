@@ -43,13 +43,13 @@ const Home: NextPage<HomePageProps> = ({ pokemons }: HomePageProps) => {
           </PokemonGridList>
         </div>
       </HomePageMainLayout>
-    </div>
+    </>
   )
 }
 
 const fetchPokemonMetadadata = async (
   pokemon: ApiPokemon,
-  colorFunc: (str: string, quality: number) => Color,
+  colorFunc: (str: string, quality: number) => Promise<Color>,
 ): Promise<Pokemon> => {
   const { sprites, ...rest } = await getPokemon(pokemon.name)
   const pokemonDominantColor = await colorFunc(sprites.front_default, 50)
