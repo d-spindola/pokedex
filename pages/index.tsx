@@ -1,15 +1,15 @@
 import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
-import { Fragment } from 'react'
-import FilterContainer from '../components/layouts/home/FilterContainer'
 import HomePageMainLayout from '../components/layouts/home/HomePageMainLayout'
-import PokemonCardLink from '../components/PokemonCardLink'
 import PokemonGridList from '../components/PokemonGridList'
 import { getManyPokemons, getPokemon } from '../lib/api'
 import { ApiPokemon } from '../lib/types'
 import { Pokemon } from '../types/api'
 import Colorthief, { Color } from 'colorthief'
 import Header from '@components/layouts/shared/Header'
+import PokemonSearchFilter from '@components/PokemonSearchFilter'
+import { DataContextProvider } from 'context/DataContext'
+import FilterContainer from '@components/layouts/home/FilterContainer'
 
 interface HomePageProps {
   pokemons: Pokemon[]
@@ -24,24 +24,15 @@ const Home: NextPage<HomePageProps> = ({ pokemons }: HomePageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomePageMainLayout>
-        <Header appName={process.env.APP_NAME as string} />
-        <FilterContainer></FilterContainer>
-        <div>
-          <PokemonGridList>
-            <Fragment>
-              {pokemons.map((p) => (
-                <PokemonCardLink
-                  key={p.name}
-                  pokemonName={p.name}
-                  id={p.name}
-                  types={[]}
-                  dominantColor={p.dominantColor}
-                  sprites={p.sprites}
-                />
-              ))}
-            </Fragment>
-          </PokemonGridList>
-        </div>
+        <DataContextProvider data={pokemons}>
+          <Header appName={process.env.APP_NAME as string}>
+            <PokemonSearchFilter />
+          </Header>
+          <FilterContainer />
+          <div>
+            <PokemonGridList />
+          </div>
+        </DataContextProvider>
       </HomePageMainLayout>
     </>
   )
