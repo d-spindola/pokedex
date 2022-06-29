@@ -6,10 +6,9 @@ import { getManyPokemons, getPokemon } from '../lib/api'
 import { ApiPokemon } from '../lib/types'
 import { Pokemon } from '../types/api'
 import Colorthief, { Color } from 'colorthief'
-import Header from '@components/layouts/shared/Header'
-import PokemonSearchFilter from '@components/PokemonSearchFilter'
+import Header from '../components/layouts/shared/Header'
+import PokemonSearchFilter from '../components/PokemonSearchFilter'
 import { DataContextProvider } from 'context/DataContext'
-import FilterContainer from '@components/layouts/home/FilterContainer'
 
 interface HomePageProps {
   pokemons: Pokemon[]
@@ -28,7 +27,6 @@ const Home: NextPage<HomePageProps> = ({ pokemons }: HomePageProps) => {
           <Header appName={process.env.APP_NAME as string}>
             <PokemonSearchFilter />
           </Header>
-          <FilterContainer />
           <div>
             <PokemonGridList />
           </div>
