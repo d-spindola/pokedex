@@ -7,6 +7,10 @@ export default css`
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
+  *:focus {
+    outline: none;
+  }
+
   body {
     margin: 0;
     padding: 0;
