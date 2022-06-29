@@ -11,7 +11,7 @@ const InputSpacementController = styled.div({
 
 const InputContainer = styled.div({
   display: 'flex',
-  border: '2px solid black',
+  border: '3px solid #576eff',
   width: 'min(300px, 90%)',
   height: '40px',
 })
@@ -21,27 +21,29 @@ const CustomInput = styled.input({
   height: '100%',
   width: '100%',
   background: 'none',
-  fontSize: '1.4em',
+  fontSize: '1em',
   padding: '0 10px',
 })
 
-const CustomButton = styled.button({
-  background: 'transparent',
-  border: 'none',
-  width: '40px',
-  borderLeft: '2px solid black',
-  '&:hover': {
-    cursor: 'pointer',
-    background: 'black',
-    color: 'white',
-    transition: 'all .2s ease-in-out',
-  },
-})
+// const CustomButton = styled.button({
+//   background: 'transparent',
+//   border: 'none',
+//   width: '40px',
+//   borderLeft: '2px solid black',
+//   '&:hover': {
+//     cursor: 'pointer',
+//     background: 'black',
+//     color: 'white',
+//     transition: 'all .2s ease-in-out',
+//   },
+// })
 
 const PokemonSearchFilter: FC = () => {
   const { onQueryChange } = useDataContext()
 
-  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>): void => {
     onQueryChange(target.value)
   }
 
@@ -49,13 +51,14 @@ const PokemonSearchFilter: FC = () => {
     <InputSpacementController>
       <InputContainer>
         <CustomInput
+          data-testid="test-search-input-filter"
           placeholder="pokemon name..."
           onChange={handleChange}
           type="text"
         />
-        <CustomButton>
+        {/* <CustomButton>
           <FaSearch size="80%" />
-        </CustomButton>
+        </CustomButton> */}
       </InputContainer>
     </InputSpacementController>
   )
