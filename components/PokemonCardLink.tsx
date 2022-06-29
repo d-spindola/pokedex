@@ -4,6 +4,7 @@ import { FC } from 'react'
 import Image from 'next/image'
 import { Sprite } from '@lib/poke-api/types'
 import { arrayRgbToHsl, arrayToRgb } from 'utils/colors'
+import Image from 'next/image'
 
 interface Props {
   pokemonName: string
@@ -61,7 +62,7 @@ const PokemonCardLink: FC<Props> = ({
   sprites,
 }) => {
   return (
-    <Container background={dominantColor}>
+    <Container data-testid="test-card-link" background={dominantColor}>
       <PokemonNameContainer>
         <PokemonNameText>{pokemonName}</PokemonNameText>
       </PokemonNameContainer>
