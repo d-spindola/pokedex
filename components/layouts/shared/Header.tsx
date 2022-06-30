@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import Image from 'next/image'
-import { FC } from 'react'
+import { FC, PropsWithChildren } from 'react'
+import { MdOutlineCatchingPokemon } from 'react-icons/md'
 
 const HeaderContainer = styled.header({
   display: 'flex',
@@ -13,24 +13,25 @@ const LogoContainer = styled.div({
   alignItems: 'center',
   fontSize: '1.2em',
   fontWeight: 'bold',
+  '& > p': {
+    color: '#576eff',
+  },
 })
 
 interface Props {
   appName: string
 }
 
-const Header: FC<Props> = ({ appName }) => {
+const Header: FC<PropsWithChildren<Props>> = ({ appName, children }) => {
   return (
     <HeaderContainer>
       <LogoContainer>
-        <Image
-          src="/pokeball.png"
-          alt="Pokeball representing the app logo"
-          width={32}
-          height={32}
-        />
-        <p>{appName}</p>
+        <MdOutlineCatchingPokemon fill="#ff5773" size={40} />
+        <p style={{ textTransform: 'capitalize', fontSize: '2em' }}>
+          {appName}
+        </p>
       </LogoContainer>
+      {children}
     </HeaderContainer>
   )
 }

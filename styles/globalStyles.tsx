@@ -7,13 +7,38 @@ export default css`
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
+  *:focus {
+    outline: none;
+  }
+
   body {
     margin: 0;
     padding: 0;
+    background-color: #ffb58c38;
   }
 
   p {
     padding: 0;
     margin: 0;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    background: #fff;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #3e3e3e;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    width: 5px;
+    background: #576eff;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #272727;
   }
 `
