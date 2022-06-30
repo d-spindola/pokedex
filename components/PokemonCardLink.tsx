@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Color } from 'colorthief'
 import { FC } from 'react'
+import Image from 'next/image'
 import { Sprite } from '@lib/poke-api/types'
 
 interface Props {
@@ -65,10 +66,12 @@ const PokemonCardLink: FC<Props> = ({
       </div>
       <ImageContainer>
         {sprites.front_default && (
-          <img
+          <Image
             src={sprites.front_default}
             width={100}
             height={100}
+            alt={`Pokemon ${pokemonName} front male sprite.`}
+            objectFit="contain"
             crossOrigin="anonymous"
           />
         )}
