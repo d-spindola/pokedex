@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { Color } from 'colorthief'
 import { FC } from 'react'
-import Image from 'next/image'
 import { Sprite } from '@lib/poke-api/types'
 import { arrayRgbToHsl, arrayToRgb } from 'utils/colors'
 import Image from 'next/image'
