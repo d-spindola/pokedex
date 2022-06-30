@@ -24,7 +24,7 @@ const Home: NextPage<HomePageProps> = ({ pokemons }: HomePageProps) => {
       </Head>
       <HomePageMainLayout>
         <DataContextProvider data={pokemons}>
-          <Header appName={process.env.APP_NAME as string}>
+          <Header appName={process.env.NEXT_PUBLIC_APP_NAME as string}>
             <PokemonSearchFilter />
           </Header>
           <div>

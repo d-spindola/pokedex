@@ -1,9 +1,5 @@
 const path = require("path");
 
-const appInfo = {
-  APP_NAME: "pokedx",
-};
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -12,9 +8,6 @@ const nextConfig = {
   },
   images: {
     domains: ["raw.githubusercontent.com"],
-  },
-  env: {
-    ...appInfo,
   },
 };
 
