@@ -14,7 +14,7 @@ export async function getPokemon(nameOrId: string): Promise<ApiPokemon> {
 }
 
 export async function getManyPokemons(): Promise<Res<ApiPokemonList>> {
-  return pokeApi.get<ApiPokemonList>(`/pokemon?limit=${50}&offset=${0}`)
+  return pokeApi.get<ApiPokemonList>(`/pokemon?limit=${5}&offset=${0}`)
 }
 
 export default pokeApi
