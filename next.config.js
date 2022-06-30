@@ -9,7 +9,6 @@ const nextConfig = {
   images: {
     domains: ["raw.githubusercontent.com"],
   },
-  distDir: 'build'
 };
 
 module.exports = nextConfig;
