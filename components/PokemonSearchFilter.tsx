@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { useDataContext } from 'context/DataContext/useDataContext'
 import { FC } from 'react'
-import { FaSearch } from 'react-icons/fa'
 
 const InputSpacementController = styled.div({
   display: 'flex',
