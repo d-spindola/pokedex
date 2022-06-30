@@ -1,8 +1,9 @@
 import styled from '@emotion/styled'
 import { ReactNode } from 'react'
 
-const mapTooltipColor = (type: string | ReactNode) => {
+const mapTooltipColor = (type: string | ReactNode): string => {
   switch (type) {
+    default:
     case 'grass':
       return 'green'
     case 'fire':

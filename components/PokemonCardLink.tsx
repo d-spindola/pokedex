@@ -1,23 +1,33 @@
 import styled from '@emotion/styled'
+import { Color } from 'colorthief'
 import { FC } from 'react'
-import { Sprite } from '../lib/types'
+import { Sprite } from '@lib/poke-api/types'
+import { arrayRgbToHsl, arrayToRgb } from 'utils/colors'
+import Image from 'next/image'
 
 interface Props {
   pokemonName: string
   types: string[]
   id: unknown
-  dominantColor: [string, string, string]
+  dominantColor: Color
   sprites: Sprite
 }
 
-const Container = styled.div<{ background: string }>(({ background }) => ({
-  backgroundColor: background,
+const Container = styled.div<{ background: Color }>(({ background }) => ({
+  backgroundColor: arrayToRgb(background),
   display: 'flex',
   flexDirection: 'column',
   height: '10em',
   borderRadius: '8px',
   padding: '0 15px',
   position: 'relative',
+  border: `4px solid transparent`,
+  '&:hover': {
+    backgroundColor: arrayRgbToHsl(background, 30),
+    cursor: 'pointer',
+    border: `4px solid ${arrayRgbToHsl(background, 40)}`,
+    animation: 'all .2s ease-in-out',
+  },
   '&::before': {
     content: "''",
     backgroundImage: "url('/pokeball.png')",
@@ -27,32 +37,31 @@ const Container = styled.div<{ background: string }>(({ background }) => ({
   },
 }))
 
-const PokemonNameContainer = styled.div(() => ({
+const PokemonNameContainer = styled.div({
   padding: '0 5px',
-}))
+})
 
-const PokemonNameText = styled.p(() => ({
+const PokemonNameText = styled.p({
   fontSize: '1.5em',
   color: 'white',
   fontWeight: 'bold',
-}))
+})
 
-const ImageContainer = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: end;
-  align-items: center;
-`
+const ImageContainer = styled.div({
+  display: 'flex',
+  flex: 1,
+  justifyContent: 'end',
+  alignItems: 'center',
+})
 
 const PokemonCardLink: FC<Props> = ({
   pokemonName,
   types,
-  // id,
-  dominantColor: [r, g, b],
+  dominantColor,
   sprites,
 }) => {
   return (
-    <Container background={`rgb(${r}, ${g}, ${b})`}>
+    <Container data-testid="test-card-link" background={dominantColor}>
       <PokemonNameContainer>
         <PokemonNameText>{pokemonName}</PokemonNameText>
       </PokemonNameContainer>
@@ -65,10 +74,12 @@ const PokemonCardLink: FC<Props> = ({
       </div>
       <ImageContainer>
         {sprites.front_default && (
-          <img
+          <Image
             src={sprites.front_default}
             width={100}
             height={100}
+            alt={`Pokemon ${pokemonName} front male sprite.`}
+            objectFit="contain"
             crossOrigin="anonymous"
           />
         )}
